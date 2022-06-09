@@ -18,10 +18,24 @@ medalResults = [
 ]
 
 def createMedalTable(results):
-    # Use the results object above to create a medal table
-    # The winner gets 3 points, second place 2 points and third place 1 point
-    return
-
+    response = dict() #initialise response (to be returned) as empty dictionary
+    for x in results: #for each dictionary in inputted list
+        for y in x["podium"]: #for each element in the podium list of the current dictionary
+            if y[2:] not in response: #check if country is already in response dictionary. if country is not in response dictionary, add name and points as key/value pair
+                if y[0] == "1": #add appropriate number of points based on the first character which is the position
+                    response[y[2:]] = 3
+                if y[0] == "2":
+                    response[y[2:]] = 2
+                if y[0] == "3":
+                    response[y[2:]] = 1
+            else: #if the country is already in the response dictionary, add the apropriate number of points to the current value
+                if y[0] == "1":
+                        response[y[2:]] = response[y[2:]] + 3
+                if y[0] == "2":
+                        response[y[2:]] = response[y[2:]] + 2
+                if y[0] == "3":
+                        response[y[2:]] = response[y[2:]] + 1
+    return response
 
 def test_function():
     #This it the test function, please don't change me
